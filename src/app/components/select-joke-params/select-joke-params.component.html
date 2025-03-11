@@ -1,0 +1,9 @@
+<div>
+    <ng-content></ng-content>
+    <select #jokeTypeSelector>
+        @for(type of jokeTypes();track $index){
+            <option value={{type}}>{{type}}</option>
+        }
+    </select>
+    <button (click)="this.showJoke()">Show joke</button>
+</div>

@@ -1,13 +1,8 @@
-
-<div>
+<app-select-joke-params [jokeTypes]="jokeTypes" (showJokeEvent)="showJoke($event)">
     <h3>Joke Type</h3>
-    <select [(ngModel)]="jokeType">
-        <option value="Pun">Pun</option>
-        <option value="Programming">Programming</option>
-    </select>
-    <button (click)="this.showJoke()">Show joke</button>
-</div>
+</app-select-joke-params>
+
 @if(joke()){
-    <h2 [innerHtml]="joke()?.setup"></h2>
-    <p>{{joke()?.delivery}}</p>
+<h2 [innerHtml]="joke()?.setup"></h2>
+<p>{{joke()?.delivery}}</p>
 }
