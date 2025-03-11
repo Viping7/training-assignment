@@ -1,2 +1,13 @@
-<h2>{{joke().setup}}</h2>
-<p>{{joke().delivery}}</p>
+
+<div>
+    <h3>Joke Type</h3>
+    <select [(ngModel)]="jokeType">
+        <option value="Pun">Pun</option>
+        <option value="Programming">Programming</option>
+    </select>
+    <button (click)="this.showJoke()">Show joke</button>
+</div>
+@if(joke()){
+    <h2 [innerHtml]="joke()?.setup"></h2>
+    <p>{{joke()?.delivery}}</p>
+}

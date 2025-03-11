@@ -1,6 +1,6 @@
-type JokeType = "singlepart" | "twopart";
+type JokeType = "single" | "twopart";
 
-type Category = "Pun" | "Programming" | "Misc"
+export type Category = "Pun" | "Programming" 
 type Flags = {
     "nsfw": boolean,
     "religious": boolean,
