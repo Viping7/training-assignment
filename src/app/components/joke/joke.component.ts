@@ -19,6 +19,7 @@ export class JokeComponent {
   }
 
   showJoke(jokeType:Category){
-    this.joke.update(()=>this.jokeService.jokes[jokeType])
+    const random = Math.floor(Math.random() * (this.jokeService.jokes[jokeType].length - 0));
+    this.joke.update(()=>this.jokeService.jokes[jokeType][random])
   }
 }

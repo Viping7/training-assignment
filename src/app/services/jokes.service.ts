@@ -5,8 +5,8 @@ import { Category, Joke } from '../models/joke.type';
   providedIn: 'root'
 })
 export class JokesService {
-  jokes: { [key in Category]: Joke } = {
-    "Pun": {
+  jokes: { [key in Category]: Joke[] } = {
+    "Pun": [{
       "error": false,
       "category": "Pun",
       "type": "twopart",
@@ -23,8 +23,8 @@ export class JokesService {
       "safe": true,
       "id": 290,
       "lang": "en"
-    },
-    "Programming": {
+    }],
+    "Programming": [{
       "error": false,
       "category": "Programming",
       "type": "twopart",
@@ -41,9 +41,31 @@ export class JokesService {
       "id": 21,
       "safe": true,
       "lang": "en"
-    }
+    }]
   
   }
   
   constructor() { }
+  
+  createJoke(category:Category,setup:string, delivery:string){
+    const payload:Joke = {
+      "error": false,
+      "category":category,
+      "type": "twopart",
+      "setup": setup,
+      "delivery": delivery,
+      "flags": {
+        "nsfw": false,
+        "religious": false,
+        "political": false,
+        "racist": false,
+        "sexist": false,
+        "explicit": false
+      },
+      "id": 21,
+      "safe": true,
+      "lang": "en"
+    }
+    this.jokes[category].push(payload);
+  }
 }
