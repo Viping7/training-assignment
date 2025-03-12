@@ -61,13 +61,14 @@ export class JokeComponent {
   }
 
   showJoke({ jokeType, all }: { jokeType: Category, all?: boolean }) {
-    this.jokeSubscription = this.jokeService.getJokes(jokeType).subscribe((jokeRes) => {
+    this.jokeService.getJokes(jokeType);
+    this.jokeSubscription = this.jokeService.jokes.subscribe((jokeRes) => {
       if (all) {
-        this.jokes.update(() => jokeRes.jokes);
+        this.jokes.update(() => jokeRes);
         return;
       }
-      const random = Math.floor(Math.random() * (jokeRes.jokes.length - 0));
-      this.jokes.update(() => [jokeRes.jokes[random]])
+      const random = Math.floor(Math.random() * (jokeRes.length - 0));
+      this.jokes.update(() => [jokeRes[random]])
     })
   }
 
