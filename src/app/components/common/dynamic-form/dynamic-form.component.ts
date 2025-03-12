@@ -14,7 +14,6 @@ export class DynamicFormComponent {
   form: FormGroup | undefined;
   createJokeEmitter = output<EventEmitter<any>>();
   ngOnInit(){
-    console.log(this.fields())
     this.buildForm();
   }
 
@@ -33,4 +32,5 @@ export class DynamicFormComponent {
         return fieldObj
     },{} as {[key:string]:FormControl})
   }
+
 }

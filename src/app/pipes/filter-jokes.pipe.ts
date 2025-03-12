@@ -8,13 +8,13 @@ export class FilterJokesPipe implements PipeTransform {
 
   transform(value: Joke[], isCustom:CreatedBy): Joke[] {
     return value.filter(j=>{
-      if(!j.flags.userCreated && ["all","api"].includes(isCustom)){
-        return j
+      if(isCustom == "all"){
+        return j;
       }
-      if(isCustom=="user"){
-        return j.flags.userCreated
+      if(isCustom ==="api"){
+        return !j.flags.userCreated
       }
-      return j;
+      return j.flags.userCreated
     });
   }
 

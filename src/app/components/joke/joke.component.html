@@ -1,6 +1,10 @@
 <app-select-joke-params  [jokeTypes]="jokeTypes" (showJokeEvent)="showJoke($event)">
     <h3>Joke Type</h3>
 </app-select-joke-params>
+<div>
+<input type="text" [(ngModel)]="newCategory">
+<button (click)="addCategories()">Add Category</button>
+</div>
 <ng-container>
     <h5>Created By</h5>
     <label for="all">All</label>
@@ -11,10 +15,14 @@
     <input id="api" name="createdBy" [(ngModel)]="createdBy"  type="radio" value="api"/>
 </ng-container>
 
-@if(jokes()){
+
+@if(jokes().length>0){
+    <button (click)="checkIfJokeIsFlagged()">Check Flagged jokes</button>
     @for(joke of jokes() | filterJokes : createdBy();track $index){
-        <ng-container *ngFor="let joke of jokes() | filterJokes : createdBy()">
-            <h2 [innerHtml]="joke?.setup"></h2><span appMarkCustomJoke [flags]="joke?.flags"></span>
+        <ng-container>
+            <h2 [innerHtml]="joke?.setup"></h2>
+            <span appMarkCustomJoke [userCreated]="joke?.flags?.userCreated"></span>
+            <span appMarkCustomJoke [political]="joke?.flags?.political"></span>
             <p>{{joke?.delivery}}</p>
         </ng-container>
     }

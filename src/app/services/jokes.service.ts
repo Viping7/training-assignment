@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Category, Joke } from '../models/joke.type';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JokesService {
-  jokes: { [key in Category]: Joke[] } = {
+  private jokesObj = new BehaviorSubject<{ [key in Category]: Joke[] }>({
     "Pun": [{
       "error": false,
       "category": "Pun",
@@ -43,10 +44,14 @@ export class JokesService {
       "lang": "en"
     }]
   
-  }
+  });
   
+  jokes = this.jokesObj.asObservable();
   constructor() { }
   
+  getFlaggedJokes(){
+    return ["Why does the size of the snack not matter to a giraffe?"]
+  }
   createJoke(category:Category,setup:string, delivery:string){
     const payload:Joke = {
       "error": false,
@@ -67,6 +72,14 @@ export class JokesService {
       "safe": true,
       "lang": "en"
     }
-    this.jokes[category].push(payload);
+    const currentJokes = this.jokesObj.getValue();
+
+    const updatedJokes = {
+      ...currentJokes,
+      [category]:[...currentJokes[category],payload]
+    }
+    this.jokesObj.next(updatedJokes);
+    
+    // this.jokes[category].push(payload);
   }
 }
