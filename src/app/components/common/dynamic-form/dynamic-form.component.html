@@ -21,7 +21,7 @@
                     <input type="radio" formControlName={{field.name}}/>
                 }
             }
-            @if(form?.get(field.name)?.invalid && (form?.get(field.name)?.touched || form?.get(field.name)?.dirty)) {
+            @if(form.get(field.name)?.invalid && (form.get(field.name)?.touched || form.get(field.name)?.dirty)) {
                 <p *ngIf="form?.get(field.name)?.errors?.['required']"> {{field.name}} is required</p>
             }
         }

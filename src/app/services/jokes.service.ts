@@ -36,7 +36,7 @@ export class JokesService {
         "political": false,
         "racist": false,
         "sexist": false,
-        "explicit": false
+        "explicit": false,
       },
       "id": 21,
       "safe": true,
@@ -60,7 +60,8 @@ export class JokesService {
         "political": false,
         "racist": false,
         "sexist": false,
-        "explicit": false
+        "explicit": false,
+        "userCreated":true,
       },
       "id": 21,
       "safe": true,

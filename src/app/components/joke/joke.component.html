@@ -1,8 +1,21 @@
 <app-select-joke-params  [jokeTypes]="jokeTypes" (showJokeEvent)="showJoke($event)">
     <h3>Joke Type</h3>
 </app-select-joke-params>
+<ng-container>
+    <h5>Created By</h5>
+    <label for="all">All</label>
+    <input id="all" name="createdBy" [(ngModel)]="createdBy" type="radio" value="all"/>
+    <label for="user">User</label>
+    <input id="user" name="createdBy" [(ngModel)]="createdBy" type="radio" value="user"/>
+    <label for="api">API</label>
+    <input id="api" name="createdBy" [(ngModel)]="createdBy"  type="radio" value="api"/>
+</ng-container>
 
-@if(joke()){
-<h2 [innerHtml]="joke()?.setup"></h2>
-<p>{{joke()?.delivery}}</p>
+@if(jokes()){
+    @for(joke of jokes() | filterJokes : createdBy();track $index){
+        <ng-container *ngFor="let joke of jokes() | filterJokes : createdBy()">
+            <h2 [innerHtml]="joke?.setup"></h2><span appMarkCustomJoke [flags]="joke?.flags"></span>
+            <p>{{joke?.delivery}}</p>
+        </ng-container>
+    }
 }

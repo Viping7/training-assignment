@@ -10,10 +10,14 @@ import { FormsModule } from '@angular/forms';
 })
 export class SelectJokeParamsComponent {
   jokeTypes = input.required<Category[]>();
-  showJokeEvent = output<Category>();
+  showJokeEvent = output<{jokeType:Category,all?:boolean}>();
   @ViewChild("jokeTypeSelector") jokeTypeSelector!: ElementRef;
   showJoke(){
     const jokeType = this.jokeTypeSelector.nativeElement.value;
-    this.showJokeEvent.emit(jokeType);
+    this.showJokeEvent.emit({jokeType});
+  }
+  showAllJokes(){
+    const jokeType = this.jokeTypeSelector.nativeElement.value;
+    this.showJokeEvent.emit({jokeType,all:true});
   }
 }
